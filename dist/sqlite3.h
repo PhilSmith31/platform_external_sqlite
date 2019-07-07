@@ -111,9 +111,9 @@ extern "C" {
 ** [sqlite3_libversion_number()], [sqlite3_sourceid()],
 ** [sqlite_version()] and [sqlite_source_id()].
 */
-#define SQLITE_VERSION        "3.9.3"
-#define SQLITE_VERSION_NUMBER 3009003
-#define SQLITE_SOURCE_ID      "2018-12-19 16:03:56 4cb67252d39fc537601f75532ec8271994aed8bae4d20ba48a3262b52ed004c0"
+#define SQLITE_VERSION        "3.9.2"
+#define SQLITE_VERSION_NUMBER 3009002
+#define SQLITE_SOURCE_ID      "2017-07-21 07:45:23 69906880cee1f246cce494672402e0c7f29bd4ec19c437d26d603870d2bd625d"
 
 /*
 ** CAPI3REF: Run-Time Library Version Numbers
@@ -3532,15 +3532,6 @@ typedef struct sqlite3_context sqlite3_context;
 ** [sqlite3_blob_open | incremental BLOB I/O] routines.
 ** ^A negative value for the zeroblob results in a zero-length BLOB.
 **
-** ^The sqlite3_bind_pointer(S,I,P) routine causes the I-th parameter in
-** [prepared statement] S to have an SQL value of NULL, but to also be
-** associated with the pointer P.
-** ^The sqlite3_bind_pointer() routine can be used to pass
-** host-language pointers into [application-defined SQL functions].
-** ^A parameter that is initialized using [sqlite3_bind_pointer()] appears
-** to be an ordinary SQL NULL value to everything other than
-** [sqlite3_value_pointer()].
-**
 ** ^If any of the sqlite3_bind_*() routines are called with a NULL pointer
 ** for the [prepared statement] or with a prepared statement for which
 ** [sqlite3_step()] has been called more recently than [sqlite3_reset()],
@@ -3574,10 +3565,6 @@ SQLITE_API int SQLITE_STDCALL sqlite3_bind_text16(sqlite3_stmt*, int, const void
 SQLITE_API int SQLITE_STDCALL sqlite3_bind_text64(sqlite3_stmt*, int, const char*, sqlite3_uint64,
                          void(*)(void*), unsigned char encoding);
 SQLITE_API int SQLITE_STDCALL sqlite3_bind_value(sqlite3_stmt*, int, const sqlite3_value*);
-<<<<<<< HEAD
-SQLITE_API int SQLITE_STDCALL sqlite3_bind_pointer(sqlite3_stmt*, int, void*);
-=======
->>>>>>> LA.UM.5.5.c25-01800-8x96.0
 SQLITE_API int SQLITE_STDCALL sqlite3_bind_zeroblob(sqlite3_stmt*, int, int n);
 SQLITE_API int SQLITE_STDCALL sqlite3_bind_zeroblob64(sqlite3_stmt*, int, sqlite3_uint64);
 
@@ -4342,11 +4329,6 @@ SQLITE_API SQLITE_DEPRECATED int SQLITE_STDCALL sqlite3_memory_alarm(void(*)(voi
 ** sqlite3_value_text16be() and sqlite3_value_text16le() interfaces
 ** extract UTF-16 strings as big-endian and little-endian respectively.
 **
-** ^If [sqlite3_value] object V was initialized 
-** using [sqlite3_bind_pointer(S,I,P)] or [sqlite3_result_pointer(C,P)], then
-** sqlite3_value_pointer(V) will return the pointer P.  Otherwise,
-** sqlite3_value_pointer(V) returns a NULL.
-**
 ** ^(The sqlite3_value_numeric_type() interface attempts to apply
 ** numeric affinity to the value.  This means that an attempt is
 ** made to convert the value to an integer or floating point.  If
@@ -4666,14 +4648,6 @@ typedef void (*sqlite3_destructor_type)(void*);
 ** ^A [protected sqlite3_value] object may always be used where an
 ** [unprotected sqlite3_value] object is required, so either
 ** kind of [sqlite3_value] object can be used with this interface.
-**
-** ^The sqlite3_result_pointer(C,P) interface sets the result to an
-** SQL NULL value, just like [sqlite3_result_null(C)], except that it
-** also associates the host-language pointer P with that NULL value such
-** that the pointer can be retrieved within an
-** [application-defined SQL function] using [sqlite3_value_pointer()].
-** This mechanism can be used to pass non-SQL values between
-** application-defined functions.
 **
 ** If these routines are called from within the different thread
 ** than the one containing the application-defined function that received
@@ -8467,5 +8441,4 @@ struct fts5_api {
 #endif
 
 #endif /* _FTS5_H */
-
 
