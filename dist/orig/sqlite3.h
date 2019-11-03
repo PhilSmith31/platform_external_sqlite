@@ -4367,11 +4367,11 @@ SQLITE_API int SQLITE_STDCALL sqlite3_value_bytes16(sqlite3_value*);
 SQLITE_API double SQLITE_STDCALL sqlite3_value_double(sqlite3_value*);
 SQLITE_API int SQLITE_STDCALL sqlite3_value_int(sqlite3_value*);
 SQLITE_API sqlite3_int64 SQLITE_STDCALL sqlite3_value_int64(sqlite3_value*);
+SQLITE_API void *SQLITE_STDCALL sqlite3_value_pointer(sqlite3_value*);
 SQLITE_API const unsigned char *SQLITE_STDCALL sqlite3_value_text(sqlite3_value*);
 SQLITE_API const void *SQLITE_STDCALL sqlite3_value_text16(sqlite3_value*);
 SQLITE_API const void *SQLITE_STDCALL sqlite3_value_text16le(sqlite3_value*);
 SQLITE_API const void *SQLITE_STDCALL sqlite3_value_text16be(sqlite3_value*);
-SQLITE_API void *SQLITE_STDCALL sqlite3_value_pointer(sqlite3_value*);
 SQLITE_API int SQLITE_STDCALL sqlite3_value_type(sqlite3_value*);
 SQLITE_API int SQLITE_STDCALL sqlite3_value_numeric_type(sqlite3_value*);
 
@@ -4384,6 +4384,10 @@ SQLITE_API int SQLITE_STDCALL sqlite3_value_numeric_type(sqlite3_value*);
 ** information can be used to pass a limited amount of context from
 ** one SQL function to another.  Use the [sqlite3_result_subtype()]
 ** routine to set the subtype for the return value of an SQL function.
+**
+** SQLite makes no use of subtype itself.  It merely passes the subtype
+** from the result of one [application-defined SQL function] into the
+** input of another.
 */
 SQLITE_API unsigned int SQLITE_STDCALL sqlite3_value_subtype(sqlite3_value*);
 
@@ -4684,6 +4688,7 @@ SQLITE_API void SQLITE_STDCALL sqlite3_result_error_code(sqlite3_context*, int);
 SQLITE_API void SQLITE_STDCALL sqlite3_result_int(sqlite3_context*, int);
 SQLITE_API void SQLITE_STDCALL sqlite3_result_int64(sqlite3_context*, sqlite3_int64);
 SQLITE_API void SQLITE_STDCALL sqlite3_result_null(sqlite3_context*);
+SQLITE_API void SQLITE_STDCALL sqlite3_result_pointer(sqlite3_context*, void*);
 SQLITE_API void SQLITE_STDCALL sqlite3_result_text(sqlite3_context*, const char*, int, void(*)(void*));
 SQLITE_API void SQLITE_STDCALL sqlite3_result_text64(sqlite3_context*, const char*,sqlite3_uint64,
                            void(*)(void*), unsigned char encoding);
@@ -4691,7 +4696,6 @@ SQLITE_API void SQLITE_STDCALL sqlite3_result_text16(sqlite3_context*, const voi
 SQLITE_API void SQLITE_STDCALL sqlite3_result_text16le(sqlite3_context*, const void*, int,void(*)(void*));
 SQLITE_API void SQLITE_STDCALL sqlite3_result_text16be(sqlite3_context*, const void*, int,void(*)(void*));
 SQLITE_API void SQLITE_STDCALL sqlite3_result_value(sqlite3_context*, sqlite3_value*);
-SQLITE_API void SQLITE_STDCALL sqlite3_result_pointer(sqlite3_context*, void*);
 SQLITE_API void SQLITE_STDCALL sqlite3_result_zeroblob(sqlite3_context*, int n);
 SQLITE_API int SQLITE_STDCALL sqlite3_result_zeroblob64(sqlite3_context*, sqlite3_uint64 n);
 

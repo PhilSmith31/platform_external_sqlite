@@ -8441,4 +8441,3 @@ struct fts5_api {
 #endif
 
 #endif /* _FTS5_H */
-
